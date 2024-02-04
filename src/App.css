@@ -1,0 +1,15 @@
+
+@media (min-width: 640px) {
+  .responsive {
+    width: 375px;
+  }
+  .itemFlex {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 320px) {
+  .responsive {
+    width: 320px;
+  }
+}

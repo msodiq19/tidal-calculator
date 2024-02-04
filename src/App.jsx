@@ -1,41 +1,74 @@
 import { useState } from "react";
-
+import  './App.css'
 
 function App() {
-  const [hw, setHw] = useState({ f1: 1, f2: 2, f3: 1 })
-  const [lw, setLw] = useState({ f1: 1, f2: 3, f3: 3, f4: 1 });
-  const [SD, setSD] = useState(null)
+  const [hw, setHw] = useState({
+    v1: "",
+    v2: "",
+    v3: "",
+    f1: 1,
+    f2: 2,
+    f3: 1,
+  });
+  const [lw, setLw] = useState({
+    v1: "",
+    v2: "",
+    v3: "",
+    v4: "",
+    f1: 1,
+    f2: 3,
+    f3: 3,
+    f4: 1,
+  });
+  const [SD, setSD] = useState({ mhw: "", mlw: "", M: "", R: ""})
 
-  const [shw, setShw] = useState({ f1: 1, f2: 2, f3: 1 });
-  const [slw, setSlw] = useState({ f1: 1, f2: 3, f3: 3, f4: 1 });
-  const [SEC, setSEC] = useState(null);
+  const [shw, setShw] = useState({ v1: "", v2: "", v3: "", f1: 1, f2: 2, f3: 1 });
+  const [slw, setSlw] = useState({
+    v1: "",
+    v2: "",
+    v3: "",
+    v4: "",
+    f1: 1,
+    f2: 3,
+    f3: 3,
+    f4: 1,
+  });
+  const [SEC, setSEC] = useState({ mhw: "", mlw: "", m: "", r: "" });
 
-  const [D, setD] = useState(null)
+  const [D, setD] = useState("")
 
   const clear = () => {
-    setHw({ f1: 1, f2: 2, f3: 1 });
-    setLw({ f1: 1, f2: 3, f3: 3, f4: 1 });
-    setShw({ f1: 1, f2: 2, f3: 1 });
-    setSlw({ f1: 1, f2: 3, f3: 3, f4: 1 });
-    setSD(null)
-    setSEC(null)
-    setD(null)
+    setHw({ v1: "", v2: "", v3: "", f1: 1, f2: 2, f3: 1 });
+    setLw({ v1: "", v2: "", v3: "", v4: "", f1: 1, f2: 3, f3: 3, f4: 1 });
+    setShw({ v1: "", v2: "", v3: "", f1: 1, f2: 2, f3: 1 });
+    setSlw({ v1: "", v2: "", v3: "", v4: "", f1: 1, f2: 3, f3: 3, f4: 1 });
+    setSD({ mhw: "", mlw: "", M: "", R: "" });
+    setSEC({ mhw: "", mlw: "", m: "", r: "" });
+    setD("")
   }
 
   const handleSD = () => {
-    const mhw = ((hw.v1 * hw.f1) + (hw.v2 * hw.f2) + (hw.v3 * hw.f3))/4
-    const mlw = ((lw.v1 * lw.f1) + (lw.v2 * lw.f2) + (lw.v3 * lw.f3) + (lw.v4 * lw.f4))/8
-    const M = (mhw + mlw)/2
-    const R = mhw - mlw
+    let mhw = ((hw.v1 * hw.f1) + (hw.v2 * hw.f2) + (hw.v3 * hw.f3))/4
+    let mlw = ((lw.v1 * lw.f1) + (lw.v2 * lw.f2) + (lw.v3 * lw.f3) + (lw.v4 * lw.f4))/8
+    let M = (mhw + mlw) / 2
+    let R = mhw - mlw
+    mhw = Number(mhw.toFixed(3));
+    mlw = Number(mlw.toFixed(3));
+    M = Number(M.toFixed(3));
+    R = Number(R.toFixed(3));
     setSD({ ...SD, mhw: mhw, mlw: mlw, M: M, R: R })
     return { mhw: mhw, mlw: mlw, M: M, R: R };
   }
 
   const handleSEC = () => {
-    const mhw = (shw.v1 * shw.f1 + shw.v2 * shw.f2 + shw.v3 * shw.f3)/4;
-    const mlw = (slw.v1 * slw.f1 + slw.v2 * slw.f2 + slw.v3 * slw.f3 + slw.v4 * slw.f4)/8;
-    const M = (mhw + mlw) / 2;
-    const R = mhw - mlw;
+    let mhw = (shw.v1 * shw.f1 + shw.v2 * shw.f2 + shw.v3 * shw.f3)/4;
+    let mlw = (slw.v1 * slw.f1 + slw.v2 * slw.f2 + slw.v3 * slw.f3 + slw.v4 * slw.f4)/8;
+    let M = (mhw + mlw) / 2;
+    let R = mhw - mlw;
+    mhw = Number(mhw.toFixed(3));
+    mlw = Number(mlw.toFixed(3));
+    M = Number(M.toFixed(3));
+    R = Number(R.toFixed(3));
     setSEC({ ...SD, mhw: mhw, mlw: mlw, m: M, r: R });
     return { mhw: mhw, mlw: mlw, m: M, r: R };
   };
@@ -43,17 +76,18 @@ function App() {
   const handleAll = () => {
     const { sd_mhw, sd_mlw, M, R } = handleSD();
     const { mhw, mlw, m, r } = handleSEC()
-    const D = m - ((M * r) / R)
+    let D = m - ((M * r) / R)
+    D = Number(D.toFixed(3));
     setD(D)
   }
 
   return (
     <>
-      <div className="max-w-[400px] bg-white mx-auto shadow-md my-4 overflow-x-hidden">
+      <div className="responsive bg-white mx-auto shadow-md my-4 overflow-x-hidden">
         {/* HEADER */}
         <div className="border-b">
           <h2 className="uppercase text-2xl text-center py-2">
-            Tidal Calculator
+            Datum-Calculator
           </h2>
         </div>
         {/* HEADER */}
@@ -62,7 +96,7 @@ function App() {
         <div className="px-6 py-4">
           {/* STANDARD PORT */}
           <div>
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <h4 className="uppercase text-xl my-4">Standard Port</h4>
               <button
                 onClick={handleSD}
@@ -131,7 +165,7 @@ function App() {
               </div>
               {/* H.W */}
               {/* L.W */}
-              <div className="flex items-center gap-x-2">
+              <div className="flex items-center flex-wrap gap-x-2 gap-y-1">
                 <label htmlFor="LW" className="">
                   L.W
                 </label>
@@ -255,7 +289,7 @@ function App() {
 
           {/* SECONDARY PORT */}
           <div>
-            <div className="flex justify-between">
+            <div className="flex justify-between items-center">
               <h4 className="uppercase text-xl my-4">Secondary Port</h4>
               <button
                 onClick={handleSEC}
@@ -324,7 +358,7 @@ function App() {
               </div>
               {/* H.W */}
               {/* L.W */}
-              <div className="flex items-center gap-x-2">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                 <label htmlFor="LW" className="">
                   L.W
                 </label>
@@ -449,7 +483,7 @@ function App() {
         {/* MAIN */}
 
         {/* FOOTER */}
-        <div className="px-6 py-4 flex justify-between items-center">
+        <div className="px-6 py-4 bg-[#345] flex justify-between items-center">
           <div className="flex gap-x-2">
             <button
               onClick={clear}
@@ -459,19 +493,19 @@ function App() {
             </button>
             <button
               onClick={handleAll}
-              className="bg-[#345] text-white w-[6em] h-[2.5em] p-2 rounded-md capitalize"
+              className="bg-white text-[#345] w-[6em] h-[2.5em] p-2 rounded-md capitalize"
             >
               compute
             </button>
           </div>
-          <div className="flex items-center gap-x-2">
-            <label htmlFor="d">D</label>
+          <div className="flex items-center gap-x-2 text-white">
+            <label htmlFor="d">DTUM</label>
             <input
               type="number"
               id="d"
               value={D}
               disabled
-              className="w-[70px] p-1"
+              className="w-[70px] p-1 bg-white text-black"
             />
           </div>
         </div>
