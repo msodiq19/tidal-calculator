@@ -1,5 +1,6 @@
 import { useState } from "react";
-import  './App.css'
+import './App.css'
+import logo from './assets/unilag-logo.png'
 
 function App() {
   const [hw, setHw] = useState({
@@ -86,9 +87,14 @@ function App() {
       <div className="responsive bg-white mx-auto shadow-md my-4 overflow-x-hidden">
         {/* HEADER */}
         <div className="border-b">
-          <h2 className="uppercase text-2xl text-center py-2">
-            Datum-Calculator
-          </h2>
+          <div className="flex justify-center items-center">
+            <img src={logo} alt="unilag_logo" className="w-[50px]" />
+            <h2 className="uppercase text-2xl text-center py-2">
+              Datum-Calculator
+            </h2>
+          </div>
+
+          <h3 className="uppercase text-xl text-center">Group 9</h3>
         </div>
         {/* HEADER */}
 
